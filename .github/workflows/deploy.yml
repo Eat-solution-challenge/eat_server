@@ -21,7 +21,7 @@ jobs:
       - name: Create application-secret.yml
         run: |
           touch ./src/main/resources/application-secret.yml
-          echo "${{ secrets.APPLICATION_SECRET }}" > ./application-secret.yml
+          echo "${{ secrets.APPLICATION_SECRET }}" > ./src/main/resources/application-secret.yml
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
@@ -46,7 +46,7 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           script: mkdir -p /home/ubuntu/srv/ubuntu
 
-      - name: copy source via ssh key
+      - name: Copy source via ssh key
         uses: burnett01/rsync-deployments@4.1
         with:
           switches: -avzr —delete
@@ -55,7 +55,7 @@ jobs:
           remote_user: ubuntu
           remote_key: ${{ secrets.EC2_KEY }}
 
-      - name: executing remote ssh commands using password
+      - name: Executing remote ssh commands using password
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.EC2_HOST }}
