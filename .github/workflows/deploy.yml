@@ -49,7 +49,7 @@ jobs:
       - name: Copy source via ssh key
         uses: burnett01/rsync-deployments@4.1
         with:
-          switches: -avzr —delete
+          switches: -avzr --delete
           remote_path: /home/ubuntu/srv/ubuntu/
           remote_host: ${{ secrets.EC2_HOST }}
           remote_user: ubuntu
