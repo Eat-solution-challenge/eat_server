@@ -58,7 +58,6 @@ cmake-build-*/
 
 # IntelliJ
 out/
-*.yml
 *.properties
 .idea
 *.iws
