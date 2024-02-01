@@ -2,6 +2,7 @@ package com.eat.eat_server.Entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -28,4 +29,15 @@ public class User extends BaseTimeEntity{
 
     private Long weight;
 
+    @Builder
+    public User (String nickname, String email, String password,
+                 int age, String gender, Long height, Long weight){
+        this.nickname = nickname;
+        this.email = email;
+        this.password = password;
+        this.age = age;
+        this.gender = gender;
+        this.height = height;
+        this.weight = weight;
+    }
 }

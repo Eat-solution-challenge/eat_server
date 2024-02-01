@@ -1,5 +1,6 @@
 package com.eat.eat_server.Authentication.Dto;
 
+import com.eat.eat_server.Entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,4 +18,5 @@ public class JoinRequestDto {
     private Long weight;
     private String gender;
     private int age;
+
 }
