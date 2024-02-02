@@ -1,6 +1,7 @@
 package com.eat.eat_server.Authentication.Controller;
 
 import com.eat.eat_server.Authentication.Dto.JoinRequestDto;
+import com.eat.eat_server.Authentication.Dto.LoginRequestDto;
 import com.eat.eat_server.Authentication.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,4 +24,8 @@ public class UserController {
         return userService.join(requestDto);
     }
 
+    @PostMapping("/api/login")
+    public String login(@RequestBody LoginRequestDto requestDto){
+        return userService.login(requestDto);
+    }
 }
