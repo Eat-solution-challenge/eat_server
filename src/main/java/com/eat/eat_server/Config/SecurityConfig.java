@@ -1,5 +1,7 @@
 package com.eat.eat_server.Config;
 
+import com.eat.eat_server.Authentication.Jwt.JwtProvider;
+import com.eat.eat_server.Repository.UserRepository;
 import jakarta.servlet.DispatcherType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -14,11 +16,17 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+    private final UserRepository userRepository;
 
     //패스워드 암호화
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public JwtProvider jwtTokenProvider(){
+        return new JwtProvider(userRepository);
     }
 
     @Bean
