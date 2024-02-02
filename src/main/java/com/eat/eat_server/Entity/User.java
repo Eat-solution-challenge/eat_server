@@ -6,6 +6,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
@@ -28,6 +32,10 @@ public class User extends BaseTimeEntity{
     private Long height;
 
     private Long weight;
+
+    @Enumerated(EnumType.STRING)
+    private Role roles;
+
 
     @Builder
     public User (String nickname, String email, String password,
