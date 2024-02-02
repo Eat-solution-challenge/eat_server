@@ -8,6 +8,7 @@ import com.eat.eat_server.Repository.UserRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -67,7 +68,7 @@ public class JwtProvider {
             if (!this.validExpiredTime(expiresAt)){ //만료시간이 지났는가? 지났다 - F, 안 지남 - T
                 return null;
             }
-            User tokenUser = userRepository.findByEmail(email);
+            User tokenUser = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다."));
             return tokenUser;
         } catch (Exception e) {
             e.printStackTrace();
