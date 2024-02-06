@@ -32,7 +32,7 @@ public class LogController {
     }
 
     @GetMapping("/logs")
-    public ResponseEntity<List<LogResponseDto>> findLogs(@RequestParam("subCategoryId") long subCategoryId) {
+    public ResponseEntity<List<LogResponseDto>> findLogs(@RequestParam(required=false) Long subCategoryId) {
         List<LogResponseDto> logResponseDtos = logService.findLogs(subCategoryId);
         return ResponseEntity.ok(logResponseDtos);
     }

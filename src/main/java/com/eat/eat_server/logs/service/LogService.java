@@ -38,7 +38,11 @@ public class LogService {
     }
 
     public List<LogResponseDto> findLogs(Long subCategoryId) {
-        List<Log> logs = logRepository.findBySubCategoryId(subCategoryId);
+        List<Log> logs;
+        if (subCategoryId == null) {
+            logs = logRepository.findAll();
+        } else {
+            logs = logRepository.findBySubCategoryId(subCategoryId);        }
         return logs.stream()
                 .map(LogResponseDto::from)
                 .collect(Collectors.toList());
