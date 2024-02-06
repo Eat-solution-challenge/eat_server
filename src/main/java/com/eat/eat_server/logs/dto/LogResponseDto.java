@@ -6,12 +6,13 @@ import lombok.Getter;
 
 @Getter
 public class LogResponseDto {
-    private final Long id;
+
+    private final long id;
     private final String subCategory;
     private final String menu;
 
     @Builder
-    private LogResponseDto(Long id,
+    private LogResponseDto(long id,
                            String subCategory,
                            String menu) {
         this.id = id;

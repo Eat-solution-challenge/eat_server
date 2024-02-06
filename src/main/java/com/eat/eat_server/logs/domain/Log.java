@@ -14,20 +14,39 @@ public class Log {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "log_id")
-    private Long id;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "subcategory_id")
     private SubCategory subCategory;
 
-    @Column
+    @Column(nullable = false)
     private String menu;
 
-    @Column
-    private Double intake;
+    @Column(nullable = false)
+    private double intake;
+
+    @Column(nullable = false)
+    private String unit;
+
+
+    @Column(nullable = false)
+    private int level;
 
     @Column
-    private String unit;
+    private int calorie;
+
+    @Column
+    private double fat;
+
+    @Column
+    private double protein;
+
+    @Column
+    private double carbs;
+
+    @Column
+    private double sugar;
 
     @Column
     private String memo;
@@ -36,13 +55,26 @@ public class Log {
     private Log(
             SubCategory subCategory,
             String menu,
-            Double intake,
+            double intake,
             String unit,
-            String memo) {
+            int level,
+            int calorie,
+            double fat,
+            double protein,
+            double carbs,
+            double sugar,
+            String memo
+            ) {
         this.subCategory = subCategory;
         this.menu = menu;
         this.intake = intake;
         this.unit = unit;
+        this.level = level;
+        this.calorie = calorie;
+        this.fat = fat;
+        this.protein = protein;
+        this.carbs = carbs;
+        this.sugar = sugar;
         this.memo = memo;
     }
 
@@ -52,6 +84,12 @@ public class Log {
                 .menu(logRequestDto.getMenu())
                 .intake(logRequestDto.getIntake())
                 .unit(logRequestDto.getUnit())
+                .level(logRequestDto.getLevel())
+                .calorie(logRequestDto.getCalorie())
+                .fat(logRequestDto.getFat())
+                .protein(logRequestDto.getProtein())
+                .carbs(logRequestDto.getCarbs())
+                .sugar(logRequestDto.getSugar())
                 .memo(logRequestDto.getMemo())
                 .build();
     }

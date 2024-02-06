@@ -9,7 +9,13 @@ public class LogRequestDto {
 
     private final String subCategory;
     private final String menu;
-    private final Double intake;
+    private final double intake;
     private final String unit;
+    private final int level;
+    private final int calorie;
+    private final double fat;
+    private final double protein;
+    private final double carbs;
+    private final double sugar;
     private final String memo;
 }
