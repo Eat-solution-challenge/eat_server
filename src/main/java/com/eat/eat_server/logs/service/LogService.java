@@ -11,6 +11,9 @@ import com.eat.eat_server.logs.repository.SubCategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class LogService {
@@ -32,5 +35,12 @@ public class LogService {
         SubCategory subCategory = getOrCreateSubCategory(categoryId, subCategoryName);
         Log log = logRepository.save(Log.of(subCategory, logRequestDto));
         return LogResponseDto.from(log);
+    }
+
+    public List<LogResponseDto> findLogs(Long subCategoryId) {
+        List<Log> logs = logRepository.findBySubCategoryId(subCategoryId);
+        return logs.stream()
+                .map(LogResponseDto::from)
+                .collect(Collectors.toList());
     }
 }
