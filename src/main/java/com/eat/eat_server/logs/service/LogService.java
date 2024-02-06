@@ -11,7 +11,6 @@ import com.eat.eat_server.logs.repository.SubCategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-
 @Service
 @RequiredArgsConstructor
 public class LogService {
