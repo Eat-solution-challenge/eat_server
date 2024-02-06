@@ -16,7 +16,7 @@ public class CategoryService {
     private final SubCategoryRepository subCategoryRepository;
 
     public List<SubCategoryResponseDto> findSubCategories(Long categoryId) {
-        List<SubCategory> subCategories = subCategoryRepository.findAll();
+        List<SubCategory> subCategories = subCategoryRepository.findByCategoryId(categoryId);
         return subCategories.stream()
                 .map(SubCategoryResponseDto::from)
                 .collect(Collectors.toList());
