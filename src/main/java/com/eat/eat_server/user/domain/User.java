@@ -1,7 +1,7 @@
-package com.eat.eat_server.Entity;
+package com.eat.eat_server.user.domain;
 
+import com.eat.eat_server.BaseTimeEntity;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

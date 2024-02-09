@@ -1,6 +1,6 @@
-package com.eat.eat_server.Repository;
+package com.eat.eat_server.user.repository;
 
-import com.eat.eat_server.Entity.User;
+import com.eat.eat_server.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

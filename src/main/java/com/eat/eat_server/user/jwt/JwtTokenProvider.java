@@ -1,6 +1,6 @@
-package com.eat.eat_server.Authentication.Jwt;
+package com.eat.eat_server.user.jwt;
 
-import com.eat.eat_server.Authentication.CustomUserDetailsService;
+import com.eat.eat_server.user.service.CustomUserDetailsService;
 import io.jsonwebtoken.*;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;

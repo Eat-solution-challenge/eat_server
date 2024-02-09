@@ -1,4 +1,4 @@
-package com.eat.eat_server.Authentication.Dto;
+package com.eat.eat_server.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
