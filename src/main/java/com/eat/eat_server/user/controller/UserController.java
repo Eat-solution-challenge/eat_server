@@ -1,15 +1,15 @@
-package com.eat.eat_server.Authentication.Controller;
+package com.eat.eat_server.user.controller;
 
-import com.eat.eat_server.Authentication.Dto.JoinRequestDto;
-import com.eat.eat_server.Authentication.Dto.LoginRequestDto;
-import com.eat.eat_server.Authentication.Service.UserService;
+import com.eat.eat_server.user.dto.JoinRequestDto;
+import com.eat.eat_server.user.dto.LoginRequestDto;
+import com.eat.eat_server.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
