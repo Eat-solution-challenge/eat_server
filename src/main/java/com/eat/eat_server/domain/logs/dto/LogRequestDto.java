@@ -1,4 +1,4 @@
-package com.eat.eat_server.logs.dto;
+package com.eat.eat_server.domain.logs.dto;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
-package com.eat.eat_server.logs.repository;
+package com.eat.eat_server.domain.logs.repository;
 
-import com.eat.eat_server.logs.domain.Category;
+import com.eat.eat_server.domain.logs.domain.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

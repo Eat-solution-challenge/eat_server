@@ -1,7 +1,8 @@
-package com.eat.eat_server.logs.domain;
+package com.eat.eat_server.domain.logs.domain;
 
+import com.eat.eat_server.global.entity.BaseTimeEntity;
 import jakarta.persistence.*;
-import com.eat.eat_server.logs.dto.LogRequestDto;
+import com.eat.eat_server.domain.logs.dto.LogRequestDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Log {
+public class Log extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +29,6 @@ public class Log {
 
     @Column(nullable = false)
     private String unit;
-
 
     @Column(nullable = false)
     private int level;

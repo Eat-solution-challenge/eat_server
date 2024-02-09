@@ -1,4 +1,4 @@
-package com.eat.eat_server.logs.domain;
+package com.eat.eat_server.domain.logs.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;

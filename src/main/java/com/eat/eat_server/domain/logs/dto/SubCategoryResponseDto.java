@@ -1,6 +1,6 @@
-package com.eat.eat_server.logs.dto;
+package com.eat.eat_server.domain.logs.dto;
 
-import com.eat.eat_server.logs.domain.SubCategory;
+import com.eat.eat_server.domain.logs.domain.SubCategory;
 import lombok.Builder;
 import lombok.Getter;
 
