@@ -1,16 +1,14 @@
-package com.eat.eat_server.Authentication.Service;
+package com.eat.eat_server.user.service;
 
-import com.eat.eat_server.Authentication.Dto.JoinRequestDto;
-import com.eat.eat_server.Authentication.Dto.LoginRequestDto;
-import com.eat.eat_server.Authentication.Dto.TokenResponseDto;
-import com.eat.eat_server.Authentication.Jwt.JwtTokenProvider;
-import com.eat.eat_server.Entity.User;
-import com.eat.eat_server.Repository.UserRepository;
+import com.eat.eat_server.user.dto.JoinRequestDto;
+import com.eat.eat_server.user.dto.LoginRequestDto;
+import com.eat.eat_server.user.dto.TokenResponseDto;
+import com.eat.eat_server.user.jwt.JwtTokenProvider;
+import com.eat.eat_server.user.domain.User;
+import com.eat.eat_server.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

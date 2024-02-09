@@ -1,7 +1,7 @@
-package com.eat.eat_server.Authentication.Dto;
+package com.eat.eat_server.user.dto;
 
-import com.eat.eat_server.Entity.Role;
-import com.eat.eat_server.Entity.User;
+import com.eat.eat_server.user.domain.Role;
+import com.eat.eat_server.user.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

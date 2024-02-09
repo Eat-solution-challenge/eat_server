@@ -1,4 +1,4 @@
-package com.eat.eat_server.Entity;
+package com.eat.eat_server;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
