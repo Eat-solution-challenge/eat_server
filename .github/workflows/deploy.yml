@@ -67,4 +67,5 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
           script: |
-            sh /home/ubuntu/srv/ubuntu/config/scripts/deploy.sh
+            cd /home/ubuntu/srv/ubuntu
+            bash config/scripts/deploy.sh

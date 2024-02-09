@@ -23,7 +23,7 @@ then
   sudo chmod +x /usr/local/bin/docker-compose
 fi
 
-source /home/ubuntu/srv/ubuntu/.env
+source .env
 
 echo "pull docker image"
 sudo docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}
