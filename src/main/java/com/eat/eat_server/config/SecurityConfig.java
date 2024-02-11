@@ -1,4 +1,4 @@
-package com.eat.eat_server.global.config;
+package com.eat.eat_server.config;
 
 import com.eat.eat_server.domain.user.jwt.JwtAuthenticationFilter;
 import com.eat.eat_server.domain.user.jwt.JwtTokenProvider;
