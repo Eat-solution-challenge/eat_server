@@ -31,7 +31,8 @@ public class Log extends BaseTimeEntity {
     private String unit;
 
     @Column(nullable = false)
-    private int level;
+    @Enumerated(EnumType.STRING)
+    private Level level;
 
     @Column
     private int calorie;
@@ -57,7 +58,7 @@ public class Log extends BaseTimeEntity {
             String menu,
             double intake,
             String unit,
-            int level,
+            Level level,
             int calorie,
             double fat,
             double protein,

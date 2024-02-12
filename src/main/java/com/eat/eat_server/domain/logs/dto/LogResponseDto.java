@@ -1,5 +1,6 @@
 package com.eat.eat_server.domain.logs.dto;
 
+import com.eat.eat_server.domain.logs.domain.Level;
 import com.eat.eat_server.domain.logs.domain.Log;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,7 +12,7 @@ public class LogResponseDto {
     private final String menu;
     private final double intake;
     private final String unit;
-    private final int level;
+    private final String level;
     private final int calorie;
     private final double fat;
     private final double protein;
@@ -24,7 +25,7 @@ public class LogResponseDto {
                            String menu,
                            double intake,
                            String unit,
-                           int level,
+                           Level level,
                            int calorie,
                            double fat,
                            double protein,
@@ -35,7 +36,7 @@ public class LogResponseDto {
         this.menu = menu;
         this.intake = intake;
         this.unit = unit;
-        this.level = level;
+        this.level = level.toString();
         this.calorie = calorie;
         this.fat = fat;
         this.protein = protein;
