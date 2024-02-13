@@ -2,9 +2,11 @@ package com.eat.eat_server.domain.logs.conrtoller;
 
 import com.eat.eat_server.domain.logs.dto.LogRequestDto;
 import com.eat.eat_server.domain.logs.dto.LogResponseDto;
+import com.eat.eat_server.domain.logs.dto.ProperAmountDto;
 import com.eat.eat_server.domain.logs.dto.SubCategoryResponseDto;
 import com.eat.eat_server.domain.logs.service.CategoryService;
 import com.eat.eat_server.domain.logs.service.LogService;
+import com.eat.eat_server.domain.logs.service.ProperService;
 import com.eat.eat_server.domain.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,7 @@ public class LogController {
 
     private final LogService logService;
     private final CategoryService categoryService;
+    private final ProperService properService;
 
     @PostMapping("/categories/{categoryId}")
     public ResponseEntity<LogResponseDto> createLog(@AuthenticationPrincipal User user,
@@ -39,5 +42,12 @@ public class LogController {
     public ResponseEntity<List<LogResponseDto>> findLogs(@RequestParam(required=false) Long subCategoryId) {
         List<LogResponseDto> logResponseDtos = logService.findLogs(subCategoryId);
         return ResponseEntity.ok(logResponseDtos);
+    }
+
+    @GetMapping("/proper/{subCategoryId}")
+    public ResponseEntity<ProperAmountDto> getProperAmount(@AuthenticationPrincipal User user,
+                                                           @PathVariable Long subCategoryId){
+        ProperAmountDto properAmountDto = properService.getProperAmount(user, subCategoryId);
+        return ResponseEntity.ok(properAmountDto);
     }
 }
