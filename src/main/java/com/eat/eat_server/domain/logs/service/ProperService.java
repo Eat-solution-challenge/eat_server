@@ -30,10 +30,8 @@ public class ProperService {
                 sumOfCalorie += (l.getCalorie() * 0.8);
             else
                 sumOfCalorie += l.getCalorie();
-            System.out.println("eat cal = " + l.getCalorie());
         }
         int properAmount = sumOfCalorie / logs.size();
-        System.out.println("log size = " + logs.size());
         return ProperAmountDto.builder()
                 .properAmount(properAmount)
                 .build();
