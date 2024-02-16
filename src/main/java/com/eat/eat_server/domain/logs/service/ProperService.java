@@ -1,5 +1,6 @@
 package com.eat.eat_server.domain.logs.service;
 
+import com.eat.eat_server.domain.logs.domain.Level;
 import com.eat.eat_server.domain.logs.domain.Log;
 import com.eat.eat_server.domain.logs.domain.SubCategory;
 import com.eat.eat_server.domain.logs.dto.ProperAmountDto;
@@ -24,9 +25,9 @@ public class ProperService {
         List<Log> logs = logRepository.findBySubCategoryId(subCategory.getId());
         int sumOfCalorie = 0;
         for(Log l:logs){
-            if (l.getLevel().equals("LEVEL_LIGHT"))
+            if (l.getLevel() == Level.LEVEL_LIGHT)
                 sumOfCalorie += (l.getCalorie() * 1.2);
-            else if (l.getLevel().equals("LEVEL_OVEREAT"))
+            else if (l.getLevel() == Level.LEVEL_OVEREAT)
                 sumOfCalorie += (l.getCalorie() * 0.8);
             else
                 sumOfCalorie += l.getCalorie();
