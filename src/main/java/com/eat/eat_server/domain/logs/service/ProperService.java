@@ -21,8 +21,8 @@ public class ProperService {
     public ProperAmountDto getProperAmount(User user, String subCategoryName) {
 
         SubCategory subCategory = subCategoryRepository.findByUserAndName(user, subCategoryName);
-
         List<Log> logs = logRepository.findBySubCategoryId(subCategory.getId());
+
         int sumOfCalorie = 0;
         for(Log l:logs){
             if (l.getLevel() == Level.LEVEL_LIGHT)
@@ -32,7 +32,11 @@ public class ProperService {
             else
                 sumOfCalorie += l.getCalorie();
         }
-        int properAmount = sumOfCalorie / logs.size();
+
+        int properAmount = 0;
+        if (logs.size()!=0) {
+            properAmount = sumOfCalorie / logs.size();
+        }
         return ProperAmountDto.builder()
                 .properAmount(properAmount)
                 .build();
