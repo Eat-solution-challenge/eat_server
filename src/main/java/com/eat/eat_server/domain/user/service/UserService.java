@@ -97,6 +97,7 @@ public class UserService {
                 .userName(user.getUsername())
                 .age(user.getAge())
                 .gender(user.getGender())
+                .nickname(user.getNickname())
                 .weight(user.getWeight())
                 .height(user.getHeight())
                 .lightEat(lightEat)
