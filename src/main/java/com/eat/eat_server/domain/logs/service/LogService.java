@@ -12,6 +12,7 @@ import com.eat.eat_server.domain.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,12 +39,16 @@ public class LogService {
         return LogResponseDto.from(log);
     }
 
-    public List<LogResponseDto> findLogs(Long subCategoryId) {
-        List<Log> logs;
+    public List<LogResponseDto> findLogs(User user, Long subCategoryId) {
+        List<Log> logs = new ArrayList<>();
         if (subCategoryId == null) {
-            logs = logRepository.findAll();
+            List<SubCategory> subCategories = subCategoryRepository.findByUser(user);
+            for(SubCategory subCategory:subCategories) {
+                logs.addAll(subCategory.getLogs());
+            }
         } else {
-            logs = logRepository.findBySubCategoryId(subCategoryId);        }
+            logs = logRepository.findBySubCategoryId(subCategoryId);
+        }
         return logs.stream()
                 .map(LogResponseDto::from)
                 .collect(Collectors.toList());

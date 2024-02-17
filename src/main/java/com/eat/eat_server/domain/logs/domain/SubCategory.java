@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Getter
 @NoArgsConstructor
@@ -27,6 +29,9 @@ public class SubCategory extends BaseTimeEntity {
 
     @Column(nullable = false)
     private String name;
+
+    @OneToMany(mappedBy = "subCategory")
+    private List<Log> logs;
 
     @Builder
     private SubCategory(User user, Category category, String name) {
