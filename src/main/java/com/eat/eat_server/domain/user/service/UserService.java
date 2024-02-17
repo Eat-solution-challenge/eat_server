@@ -1,5 +1,11 @@
 package com.eat.eat_server.domain.user.service;
 
+import com.eat.eat_server.domain.logs.domain.Level;
+import com.eat.eat_server.domain.logs.domain.Log;
+import com.eat.eat_server.domain.logs.domain.SubCategory;
+import com.eat.eat_server.domain.logs.repository.LogRepository;
+import com.eat.eat_server.domain.logs.repository.SubCategoryRepository;
+import com.eat.eat_server.domain.user.dto.UserInfoRequestDto;
 import com.eat.eat_server.domain.user.repository.UserRepository;
 import com.eat.eat_server.domain.user.dto.JoinRequestDto;
 import com.eat.eat_server.domain.user.dto.LoginRequestDto;
@@ -14,58 +20,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @Transactional
 @Slf4j
 @RequiredArgsConstructor
 public class UserService {
-//    private final BCryptPasswordEncoder passwordEncoder;
-//    private final UserRepository userRepository;
-//    private final AuthenticationManagerBuilder authenticationManagerBuilder;
-//    private final JwtProvider jwtProvider;
-
-//    public String join(JoinRequestDto joinRequestDto){
-//        String email = joinRequestDto.getEmail();
-//        if (userRepository.existsByEmail(email))
-//            return "이미 존재하는 회원입니다.";
-//        String rawPassword = joinRequestDto.getPassword();
-//        String encodedPassword = passwordEncoder.encode(rawPassword);
-//        User u = new User(joinRequestDto.getNickname(), joinRequestDto.getEmail(), encodedPassword,
-//                joinRequestDto.getAge(), joinRequestDto.getGender(), joinRequestDto.getHeight(), joinRequestDto.getWeight());
-//        userRepository.save(u); //DB에 유저 저장
-//
-//        return "회원가입";
-//    }
-//
-//    public String login(LoginRequestDto requestDto){
-//        String email = requestDto.getEmail();
-//        String password = requestDto.getPassword();
-//
-//        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email, password);
-//        System.out.println("auth token =" + authenticationToken);
-//
-////        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-//        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-//        System.out.println("222222");
-//        System.out.println("auth  =" + authentication);
-//
-//        if (authentication.isAuthenticated()){ //인증이 왼료된 객체인 경우
-//            PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
-//
-//
-//            Long authenticatedId = principalDetails.getUser().getId();
-//            String authenticatedEmail = principalDetails.getUser().getEmail();
-//            String authenticatedUsername = principalDetails.getUser().getNickname();
-//
-//            return jwtProvider.generateJwtToken(authenticatedId, authenticatedEmail, authenticatedUsername);
-//
-//        }
-//        return "로그인 실패";
-//    }
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
+    private final SubCategoryRepository subCategoryRepository;
+    private final LogRepository logRepository;
+
     public Long join(JoinRequestDto requestDto) {
         //이메일 중복 검사
         if (userRepository.findByEmail(requestDto.getEmail()).isPresent()){
@@ -97,6 +66,42 @@ public class UserService {
                 .jwtRefreshToken(refreshToken)
                 .build();
 
+    }
+
+    public UserInfoRequestDto getUserInfo(User user){
+        List<SubCategory> subCategoryList = subCategoryRepository.findByUser(user);
+        long properEat = 0;
+        long overEat = 0;
+        long lightEat = 0;
+
+        for(SubCategory s : subCategoryList){
+            List<Log> logList = logRepository.findBySubCategoryId(s.getId());
+            for(Log l : logList){
+                if (l.getLevel() == Level.LEVEL_PROPER)
+                    ++properEat;
+                else if (l.getLevel() == Level.LEVEL_OVEREAT)
+                    ++overEat;
+                else
+                    ++lightEat;
+            }
+        }
+
+        long total = properEat + overEat + lightEat;
+        lightEat = lightEat * 100 / total;
+        properEat = properEat * 100 / total;
+        overEat = overEat * 100 / total;
+
+
+        return UserInfoRequestDto.builder()
+                .userName(user.getUsername())
+                .age(user.getAge())
+                .gender(user.getGender())
+                .weight(user.getWeight())
+                .height(user.getHeight())
+                .lightEat(lightEat)
+                .overEat(overEat)
+                .properEat(properEat)
+                .build();
     }
 
 

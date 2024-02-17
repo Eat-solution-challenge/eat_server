@@ -44,10 +44,10 @@ public class LogController {
         return ResponseEntity.ok(logResponseDtos);
     }
 
-    @GetMapping("/proper/{subCategoryId}")
+    @GetMapping("/proper")
     public ResponseEntity<ProperAmountDto> getProperAmount(@AuthenticationPrincipal User user,
-                                                           @PathVariable Long subCategoryId){
-        ProperAmountDto properAmountDto = properService.getProperAmount(user, subCategoryId);
+                                                           @RequestParam(required = true) String subCategoryName){
+        ProperAmountDto properAmountDto = properService.getProperAmount(user, subCategoryName);
         return ResponseEntity.ok(properAmountDto);
     }
 }
