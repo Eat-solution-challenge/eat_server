@@ -14,5 +14,6 @@ public class UserInfoRequestDto {
     private Long overEat;
     private Long properEat;
     private Long lightEat;
+    private String nickname;
 
 }
