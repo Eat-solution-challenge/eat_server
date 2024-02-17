@@ -87,10 +87,11 @@ public class UserService {
         }
 
         long total = properEat + overEat + lightEat;
-        lightEat = lightEat * 100 / total;
-        properEat = properEat * 100 / total;
-        overEat = overEat * 100 / total;
-
+        if (total!=0) {
+            lightEat = lightEat * 100 / total;
+            properEat = properEat * 100 / total;
+            overEat = overEat * 100 / total;
+        }
 
         return UserInfoRequestDto.builder()
                 .userName(user.getUsername())
