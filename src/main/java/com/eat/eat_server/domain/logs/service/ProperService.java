@@ -27,7 +27,7 @@ public class ProperService {
                     .unit(unit)
                     .build();
         }
-        List<Log> logs = logRepository.findBySubCategoryId(subCategory.getId());
+        List<Log> logs = logRepository.findBySubCategoryIdAndUnit(subCategory.getId(), unit);
 
         double sumOfIntake = 0;
         for(Log l:logs){

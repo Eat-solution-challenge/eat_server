@@ -9,4 +9,6 @@ import java.util.List;
 public interface LogRepository extends JpaRepository<Log, Long> {
 
     List<Log> findBySubCategoryId(long subCategoryId);
+
+    List<Log> findBySubCategoryIdAndUnit(long subCategoryId, String unit);
 }
