@@ -5,7 +5,9 @@ import com.eat.eat_server.domain.logs.domain.Log;
 import com.eat.eat_server.domain.logs.domain.SubCategory;
 import com.eat.eat_server.domain.logs.repository.LogRepository;
 import com.eat.eat_server.domain.logs.repository.SubCategoryRepository;
-import com.eat.eat_server.domain.user.dto.UserInfoRequestDto;
+import com.eat.eat_server.domain.trashlog.domain.TrashLog;
+import com.eat.eat_server.domain.trashlog.repository.TrashLogRepository;
+import com.eat.eat_server.domain.user.dto.UserInfoResponseDto;
 import com.eat.eat_server.domain.user.repository.UserRepository;
 import com.eat.eat_server.domain.user.dto.JoinRequestDto;
 import com.eat.eat_server.domain.user.dto.LoginRequestDto;
@@ -20,7 +22,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoField;
 import java.util.List;
 
 @Service
@@ -34,6 +37,7 @@ public class UserService {
     private final JwtTokenProvider jwtTokenProvider;
     private final SubCategoryRepository subCategoryRepository;
     private final LogRepository logRepository;
+    private final TrashLogRepository trashLogRepository;
 
     public Long join(JoinRequestDto requestDto) {
         //이메일 중복 검사
@@ -68,7 +72,7 @@ public class UserService {
 
     }
 
-    public UserInfoRequestDto getUserInfo(User user){
+    public UserInfoResponseDto getUserInfo(User user){
         List<SubCategory> subCategoryList = subCategoryRepository.findByUser(user);
         long properEat = 0;
         long overEat = 0;
@@ -93,7 +97,17 @@ public class UserService {
             overEat = overEat * 100 / total;
         }
 
-        return UserInfoRequestDto.builder()
+        //유저의 이번주 쓰레기양
+        LocalDateTime today = LocalDateTime.now();
+        int day = today.get(ChronoField.DAY_OF_WEEK); //월=1 화=2
+        if (day == 7)
+            day = 0;
+        LocalDateTime startDay = today.minusDays(day); //이번주 월요일
+        LocalDateTime endDay = startDay.plusDays(6);  //이번주 일요일
+        TrashLog trashLog = trashLogRepository.findByCreatedTimeBetweenAndUser(startDay, endDay, user);
+
+
+        return UserInfoResponseDto.builder()
                 .userName(user.getUsername())
                 .age(user.getAge())
                 .gender(user.getGender())
@@ -103,6 +117,7 @@ public class UserService {
                 .lightEat(lightEat)
                 .overEat(overEat)
                 .properEat(properEat)
+                .trashAmount(trashLog.getAmount())
                 .build();
     }
 

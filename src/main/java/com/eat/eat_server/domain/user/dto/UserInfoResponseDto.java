@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class UserInfoRequestDto {
+public class UserInfoResponseDto {
     private String userName;
     private String gender;
     private int age;
@@ -15,5 +15,6 @@ public class UserInfoRequestDto {
     private Long properEat;
     private Long lightEat;
     private String nickname;
+    private double trashAmount;
 
 }
