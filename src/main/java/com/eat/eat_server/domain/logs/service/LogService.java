@@ -3,6 +3,7 @@ package com.eat.eat_server.domain.logs.service;
 import com.eat.eat_server.domain.logs.domain.Category;
 import com.eat.eat_server.domain.logs.domain.Log;
 import com.eat.eat_server.domain.logs.domain.SubCategory;
+import com.eat.eat_server.domain.logs.dto.CalenderLogDto;
 import com.eat.eat_server.domain.logs.dto.LogRequestDto;
 import com.eat.eat_server.domain.logs.dto.LogResponseDto;
 import com.eat.eat_server.domain.logs.repository.CategoryRepository;
@@ -49,6 +50,24 @@ public class LogService {
         } else {
             logs = logRepository.findBySubCategoryId(subCategoryId);
         }
+        return logs.stream()
+                .map(LogResponseDto::from)
+                .collect(Collectors.toList());
+    }
+
+    public List<CalenderLogDto> findCalenderLogs(User user) {
+        List<Log> logs = new ArrayList<>();
+        List<SubCategory> subCategories = subCategoryRepository.findByUser(user);
+        for(SubCategory subCategory:subCategories) {
+            logs.addAll(subCategory.getLogs());
+        }
+        return logs.stream()
+                .map(CalenderLogDto::from)
+                .collect(Collectors.toList());
+    }
+
+    public List<LogResponseDto> findLogsByMenu(User user, String menu) {
+        List<Log> logs = logRepository.findByUserAndMenuKeyword(user, menu);
         return logs.stream()
                 .map(LogResponseDto::from)
                 .collect(Collectors.toList());
