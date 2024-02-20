@@ -39,6 +39,12 @@ public class SecurityConfig {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeRequests()
+                .requestMatchers("/categories/**").authenticated()
+                .requestMatchers("/logs/**").authenticated()
+                .requestMatchers("/calender/**").authenticated()
+                .requestMatchers("/proper/**").authenticated()
+                .requestMatchers("/trashlog/**").authenticated()
+                .requestMatchers("/user/mypage").authenticated()
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() //prefilght request 허용
                 .anyRequest().permitAll();
 
