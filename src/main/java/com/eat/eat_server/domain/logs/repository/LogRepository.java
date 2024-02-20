@@ -12,6 +12,10 @@ import java.util.List;
 public interface LogRepository extends JpaRepository<Log, Long> {
 
     List<Log> findBySubCategoryId(long subCategoryId);
+
+    List<Log> findBySubCategoryIdAndUnit(long subCategoryId, String unit);
+
     @Query("SELECT l FROM Log l WHERE l.menu LIKE %:keyword% AND l.subCategory.user = :user")
     List<Log> findByUserAndMenuKeyword(@Param("user") User user, @Param("keyword") String keyword);
+  
 }
