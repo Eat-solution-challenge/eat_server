@@ -65,4 +65,11 @@ public class LogService {
                 .map(CalenderLogDto::from)
                 .collect(Collectors.toList());
     }
+
+    public List<LogResponseDto> findLogsByMenu(User user, String menu) {
+        List<Log> logs = logRepository.findByUserAndMenuKeyword(user, menu);
+        return logs.stream()
+                .map(LogResponseDto::from)
+                .collect(Collectors.toList());
+    }
 }

@@ -42,6 +42,13 @@ public class LogController {
         return ResponseEntity.ok(logResponseDtos);
     }
 
+    @GetMapping("/logs/search")
+    public ResponseEntity<List<LogResponseDto>> findLogsByMenu(@AuthenticationPrincipal User user,
+                                                         @RequestParam(required=true) String menu) {
+        List<LogResponseDto> logResponseDtos = logService.findLogsByMenu(user, menu);
+        return ResponseEntity.ok(logResponseDtos);
+    }
+
     @GetMapping("/calender")
     public ResponseEntity<List<CalenderLogDto>> findCalenderLogs(@AuthenticationPrincipal User user) {
         List<CalenderLogDto> calenderLogDtos = logService.findCalenderLogs(user);
