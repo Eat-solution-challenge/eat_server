@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class TrashLog extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "trashlogs_id")
+    @Column(name = "trashlog_id")
     private Long id;
 
     private double amount;
