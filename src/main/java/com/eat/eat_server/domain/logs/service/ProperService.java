@@ -22,7 +22,7 @@ public class ProperService {
 
         SubCategory subCategory = subCategoryRepository.findByUserAndName(user, subCategoryName);
         if (subCategory == null){
-            ProperAmountDto.builder()
+            return ProperAmountDto.builder()
                     .properAmount(0)
                     .unit(unit)
                     .build();
