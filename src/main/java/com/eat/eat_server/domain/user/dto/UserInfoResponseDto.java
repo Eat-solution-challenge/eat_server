@@ -15,6 +15,7 @@ public class UserInfoResponseDto {
     private Long properEat;
     private Long lightEat;
     private String nickname;
-    private double trashAmount;
+    private double thisWeekTrashAmount;
+    private double lastWeekTrashAmount;
 
 }

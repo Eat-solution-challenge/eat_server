@@ -25,6 +25,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoField;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -104,8 +105,24 @@ public class UserService {
             day = 0;
         LocalDateTime startDay = today.minusDays(day); //이번주 월요일
         LocalDateTime endDay = startDay.plusDays(6);  //이번주 일요일
-        TrashLog trashLog = trashLogRepository.findByCreatedTimeBetweenAndUser(startDay, endDay, user);
+        Optional<TrashLog> thisWeekTrashLog = trashLogRepository.findByCreatedTimeBetweenAndUser(startDay, endDay, user);
 
+        double thisWeekTrashAmount = 0;
+        if (!thisWeekTrashLog.isEmpty()){
+            thisWeekTrashAmount = thisWeekTrashLog.get().getAmount();
+        }
+
+
+
+        //유저의 지난주 쓰레기양
+        LocalDateTime lastWeekStartDay = startDay.minusDays(7);
+        LocalDateTime lastWeekEndDay = endDay.minusDays(7);
+        Optional<TrashLog> lastWeekTrashLog = trashLogRepository.findByCreatedTimeBetweenAndUser(lastWeekStartDay, lastWeekEndDay, user);
+
+        double lastWeekTrashAmount = 0;
+        if (!lastWeekTrashLog.isEmpty()){
+            lastWeekTrashAmount = lastWeekTrashLog.get().getAmount();
+        }
 
         return UserInfoResponseDto.builder()
                 .userName(user.getUsername())
@@ -117,7 +134,8 @@ public class UserService {
                 .lightEat(lightEat)
                 .overEat(overEat)
                 .properEat(properEat)
-                .trashAmount(trashLog.getAmount())
+                .lastWeekTrashAmount(lastWeekTrashAmount)
+                .thisWeekTrashAmount(thisWeekTrashAmount)
                 .build();
     }
 

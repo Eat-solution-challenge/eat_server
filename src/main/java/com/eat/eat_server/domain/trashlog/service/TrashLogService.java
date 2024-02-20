@@ -32,7 +32,7 @@ public class TrashLogService {
             trashLog = trashLogRepository.save(TrashLog.of(user, trashLogRequestDto));
 
         }else{
-            trashLog = trashLogRepository.findByCreatedTimeBetweenAndUser(startDay, endDay, user);
+            trashLog = trashLogRepository.findByCreatedTimeBetweenAndUser(startDay, endDay, user).orElseThrow();
             trashLog.updateAmount(trashLog.getAmount() + trashLogRequestDto.getAmount());
             trashLogRepository.save(trashLog);
         }
