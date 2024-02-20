@@ -19,6 +19,7 @@ public class LogResponseDto {
     private final double carbs;
     private final double sugar;
     private final String memo;
+    private final String timeslot;
 
     @Builder
     private LogResponseDto(long id,
@@ -31,7 +32,8 @@ public class LogResponseDto {
                            double protein,
                            double carbs,
                            double sugar,
-                           String memo) {
+                           String memo,
+                           String timeslot) {
         this.id = id;
         this.menu = menu;
         this.intake = intake;
@@ -43,6 +45,7 @@ public class LogResponseDto {
         this.carbs = carbs;
         this.sugar = sugar;
         this.memo = memo;
+        this.timeslot = timeslot;
     }
 
     public static LogResponseDto from(Log log) {
@@ -58,6 +61,7 @@ public class LogResponseDto {
                 .carbs(log.getCarbs())
                 .sugar(log.getSugar())
                 .memo(log.getMemo())
+                .timeslot(log.getTimeslot())
                 .build();
     }
 }

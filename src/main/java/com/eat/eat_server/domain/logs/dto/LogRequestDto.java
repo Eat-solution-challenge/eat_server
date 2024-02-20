@@ -19,4 +19,5 @@ public class LogRequestDto {
     private final double carbs;
     private final double sugar;
     private final String memo;
+    private final String timeslot;
 }

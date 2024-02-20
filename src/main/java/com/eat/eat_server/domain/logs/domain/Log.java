@@ -52,6 +52,8 @@ public class Log extends BaseTimeEntity {
     @Column
     private String memo;
 
+    private String timeslot;
+
     @Builder
     private Log(
             SubCategory subCategory,
@@ -64,7 +66,8 @@ public class Log extends BaseTimeEntity {
             double protein,
             double carbs,
             double sugar,
-            String memo
+            String memo,
+            String timeslot
             ) {
         this.subCategory = subCategory;
         this.menu = menu;
@@ -77,6 +80,7 @@ public class Log extends BaseTimeEntity {
         this.carbs = carbs;
         this.sugar = sugar;
         this.memo = memo;
+        this.timeslot = timeslot;
     }
 
     public static Log of(SubCategory subCategory, LogRequestDto logRequestDto) {
@@ -92,6 +96,7 @@ public class Log extends BaseTimeEntity {
                 .carbs(logRequestDto.getCarbs())
                 .sugar(logRequestDto.getSugar())
                 .memo(logRequestDto.getMemo())
+                .timeslot(logRequestDto.getTimeslot())
                 .build();
     }
 }

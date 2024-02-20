@@ -22,6 +22,7 @@ public class CalenderLogDto {
     private final double intake;
     private final String unit;
     private final int calorie;
+    private final String timeslot;
 
     @Builder
     private CalenderLogDto(long id,
@@ -30,7 +31,8 @@ public class CalenderLogDto {
                            String menu,
                            double intake,
                            String unit,
-                           int calorie) {
+                           int calorie,
+                           String timeslot) {
         this.id = id;
         this.createdTime = createdTime;
         this.menu = menu;
@@ -38,6 +40,7 @@ public class CalenderLogDto {
         this.unit = unit;
         this.level = level.toString();
         this.calorie = calorie;
+        this.timeslot = timeslot;
     }
 
     public static CalenderLogDto from(Log log) {
@@ -49,6 +52,7 @@ public class CalenderLogDto {
                 .unit(log.getUnit())
                 .level(log.getLevel())
                 .calorie(log.getCalorie())
+                .timeslot(log.getTimeslot())
                 .build();
     }
 }
