@@ -6,10 +6,12 @@ import com.eat.eat_server.domain.logs.service.LogService;
 import com.eat.eat_server.domain.logs.service.ProperService;
 import com.eat.eat_server.domain.user.domain.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -50,8 +52,9 @@ public class LogController {
     }
 
     @GetMapping("/calender")
-    public ResponseEntity<List<CalenderLogDto>> findCalenderLogs(@AuthenticationPrincipal User user) {
-        List<CalenderLogDto> calenderLogDtos = logService.findCalenderLogs(user);
+    public ResponseEntity<List<CalenderLogDto>> findCalenderLogs(@AuthenticationPrincipal User user,
+                                                                 @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
+        List<CalenderLogDto> calenderLogDtos = logService.findCalenderLogs(user, date);
         return ResponseEntity.ok(calenderLogDtos);
     }
 

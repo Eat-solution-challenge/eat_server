@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -17,5 +19,7 @@ public interface LogRepository extends JpaRepository<Log, Long> {
 
     @Query("SELECT l FROM Log l WHERE l.menu LIKE %:keyword% AND l.subCategory.user = :user")
     List<Log> findByUserAndMenuKeyword(@Param("user") User user, @Param("keyword") String keyword);
+
+    List<Log> findByCreatedTimeBetweenAndSubCategoryId(LocalDateTime start, LocalDateTime end, long subCategoryId);
   
 }

@@ -4,6 +4,7 @@ import com.eat.eat_server.domain.logs.domain.SubCategory;
 import com.eat.eat_server.domain.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -14,4 +15,5 @@ public interface SubCategoryRepository extends JpaRepository<SubCategory, Long> 
     boolean existsByUserAndName(User user, String name);
     List<SubCategory> findByUserAndCategoryId(User user, long categoryId);
     List<SubCategory> findByUser(User user);
+
 }

@@ -13,6 +13,10 @@ import com.eat.eat_server.domain.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,12 +59,24 @@ public class LogService {
                 .collect(Collectors.toList());
     }
 
-    public List<CalenderLogDto> findCalenderLogs(User user) {
+    public List<CalenderLogDto> findCalenderLogs(User user, LocalDate date) {
         List<Log> logs = new ArrayList<>();
         List<SubCategory> subCategories = subCategoryRepository.findByUser(user);
-        for(SubCategory subCategory:subCategories) {
-            logs.addAll(subCategory.getLogs());
+
+        if (date != null) {
+            LocalDateTime start = date.atStartOfDay(); // 2021-10-25 00:00:00.00000000
+            LocalDateTime end = date.atTime(LocalTime.MAX); // 2021-10-25 23:59:59.999999
+
+            for (SubCategory subCategory : subCategories)
+                logs.addAll(logRepository.findByCreatedTimeBetweenAndSubCategoryId(start, end, subCategory.getId()));
+
+
+        }else{
+            for(SubCategory subCategory:subCategories) {
+                logs.addAll(subCategory.getLogs());
+            }
         }
+
         return logs.stream()
                 .map(CalenderLogDto::from)
                 .collect(Collectors.toList());
