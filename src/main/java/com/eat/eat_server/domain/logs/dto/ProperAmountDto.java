@@ -5,10 +5,12 @@ import lombok.Getter;
 
 @Getter
 public class ProperAmountDto {
-    private int properAmount;
+    private double properAmount;
+    private String unit;
 
     @Builder
-    public ProperAmountDto(int properAmount){
+    public ProperAmountDto(double properAmount, String unit){
         this.properAmount = properAmount;
+        this.unit = unit;
     }
 }

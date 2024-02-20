@@ -18,27 +18,34 @@ public class ProperService {
     private final LogRepository logRepository;
     private final SubCategoryRepository subCategoryRepository;
 
-    public ProperAmountDto getProperAmount(User user, String subCategoryName) {
+    public ProperAmountDto getProperAmount(User user, String subCategoryName, String unit) {
 
         SubCategory subCategory = subCategoryRepository.findByUserAndName(user, subCategoryName);
+        if (subCategory == null){
+            ProperAmountDto.builder()
+                    .properAmount(0)
+                    .unit(unit)
+                    .build();
+        }
         List<Log> logs = logRepository.findBySubCategoryId(subCategory.getId());
 
-        int sumOfCalorie = 0;
+        double sumOfIntake = 0;
         for(Log l:logs){
             if (l.getLevel() == Level.LEVEL_LIGHT)
-                sumOfCalorie += (l.getCalorie() * 1.2);
+                sumOfIntake += (l.getIntake() * 1.2);
             else if (l.getLevel() == Level.LEVEL_OVEREAT)
-                sumOfCalorie += (l.getCalorie() * 0.8);
+                sumOfIntake += (l.getIntake() * 0.8);
             else
-                sumOfCalorie += l.getCalorie();
+                sumOfIntake += l.getIntake();
         }
 
-        int properAmount = 0;
+        double properAmount = 0;
         if (logs.size()!=0) {
-            properAmount = sumOfCalorie / logs.size();
+            properAmount = sumOfIntake / logs.size();
         }
         return ProperAmountDto.builder()
                 .properAmount(properAmount)
+                .unit(unit)
                 .build();
     }
 }
