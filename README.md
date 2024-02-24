@@ -3,8 +3,11 @@
 - SpringBoot 3.2.1
 
 ## 🌟 How to install
-1. git clone https://github.com/Eat-solution-challenge/eat_server.git
-2. Add application-secret.yml file
+1. git clone
+   ```
+   git clone https://github.com/Eat-solution-challenge/eat_server.git
+   ```
+3. Set application-secret.yml file
   ```java
    spring:
     datasource:
