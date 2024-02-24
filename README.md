@@ -7,14 +7,14 @@
    ```
    git clone https://github.com/Eat-solution-challenge/eat_server.git
    ```
-3. Set application-secret.yml file
-  ```java
-   spring:
-    datasource:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      url: {your_database_url}
-      username: {your_database_username}
-      password: {your_database_password}
-   jwt:
-    secret: {your_jwt_secret_key}
-  ```
+2. Set application-secret.yml file
+     ```
+      spring:
+       datasource:
+         driver-class-name: com.mysql.cj.jdbc.Driver
+         url: {your_database_url}
+         username: {your_database_username}
+         password: {your_database_password}
+      jwt:
+       secret: {your_jwt_secret_key}
+     ```
