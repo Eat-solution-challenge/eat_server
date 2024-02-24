@@ -2,7 +2,7 @@
 - openjdk version "17.0.10" 2024-01-16 LTS
 - SpringBoot 3.2.1
 
-## 🌟 How to install
+## 📱 How to install
 1. git clone
    ```
    git clone https://github.com/Eat-solution-challenge/eat_server.git
