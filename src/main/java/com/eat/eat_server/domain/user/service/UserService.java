@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.ChronoField;
 import java.util.List;
 import java.util.Optional;
@@ -99,12 +100,12 @@ public class UserService {
         }
 
         //유저의 이번주 쓰레기양
-        LocalDateTime today = LocalDateTime.now();
+        LocalDateTime today = LocalDateTime.now().toLocalDate().atStartOfDay();
         int day = today.get(ChronoField.DAY_OF_WEEK); //월=1 화=2
         if (day == 7)
-            day = 0;
+            day = 1;
         LocalDateTime startDay = today.minusDays(day); //이번주 월요일
-        LocalDateTime endDay = startDay.plusDays(6);  //이번주 일요일
+        LocalDateTime endDay = startDay.plusDays(6).toLocalDate().atTime(LocalTime.MAX);  //이번주 일요일
         Optional<TrashLog> thisWeekTrashLog = trashLogRepository.findByCreatedTimeBetweenAndUser(startDay, endDay, user);
 
         double thisWeekTrashAmount = 0;

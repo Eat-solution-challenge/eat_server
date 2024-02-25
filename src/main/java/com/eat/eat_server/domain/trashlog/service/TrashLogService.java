@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.ChronoField;
 
 @Service
@@ -20,12 +21,12 @@ public class TrashLogService {
 
     public TrashLogResponseDto createTrashLog(User user, TrashLogRequestDto trashLogRequestDto){
 
-        LocalDateTime today = LocalDateTime.now();
+        LocalDateTime today = LocalDateTime.now().toLocalDate().atStartOfDay();
         int day = today.get(ChronoField.DAY_OF_WEEK); //월=1 화=2
         if (day == 7)
-            day = 0;
+            day = 1;
         LocalDateTime startDay = today.minusDays(day); //이번주 월요일
-        LocalDateTime endDay = startDay.plusDays(6);  //이번주 일요일
+        LocalDateTime endDay = startDay.plusDays(6).toLocalDate().atTime(LocalTime.MAX);  //이번주 일요일
 
         TrashLog trashLog;
         if (!trashLogRepository.existsByCreatedTimeBetweenAndUser(startDay, endDay, user)){
