@@ -18,3 +18,17 @@
       jwt:
        secret: {your_jwt_secret_key}
      ```
+3. Set main.iml file
+    ```
+    <?xml version="1.0" encoding="UTF-8"?>
+    <module type="JAVA_MODULE" version="4">
+       <component name="NewModuleRootManager" inherit-compiler-output="true">
+       <exclude-output />
+       <content url="file://$MODULE_DIR$">
+         <sourceFolder url="file://$MODULE_DIR$/java" isTestSource="false" />
+       </content>
+       <orderEntry type="inheritedJdk" />
+       <orderEntry type="sourceFolder" forTests="false" />
+     </component>
+   </module>    
+    ```
