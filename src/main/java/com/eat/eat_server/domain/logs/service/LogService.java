@@ -69,9 +69,7 @@ public class LogService {
 
             for (SubCategory subCategory : subCategories)
                 logs.addAll(logRepository.findByCreatedTimeBetweenAndSubCategoryId(start, end, subCategory.getId()));
-
-
-        }else{
+        } else {
             for(SubCategory subCategory:subCategories) {
                 logs.addAll(subCategory.getLogs());
             }

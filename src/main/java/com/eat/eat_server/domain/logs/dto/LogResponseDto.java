@@ -2,13 +2,18 @@ package com.eat.eat_server.domain.logs.dto;
 
 import com.eat.eat_server.domain.logs.domain.Level;
 import com.eat.eat_server.domain.logs.domain.Log;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 import lombok.Getter;
+
+import java.time.LocalDateTime;
 
 @Getter
 public class LogResponseDto {
 
     private final long id;
+    @JsonFormat(pattern = "MM월 dd일")
+    private final LocalDateTime createdTime;
     private final String menu;
     private final double intake;
     private final String unit;
@@ -23,6 +28,7 @@ public class LogResponseDto {
 
     @Builder
     private LogResponseDto(long id,
+                           LocalDateTime createdTime,
                            String menu,
                            double intake,
                            String unit,
@@ -35,6 +41,7 @@ public class LogResponseDto {
                            String memo,
                            String timeslot) {
         this.id = id;
+        this.createdTime = createdTime;
         this.menu = menu;
         this.intake = intake;
         this.unit = unit;
@@ -51,6 +58,7 @@ public class LogResponseDto {
     public static LogResponseDto from(Log log) {
         return LogResponseDto.builder()
                 .id(log.getId())
+                .createdTime(log.getCreatedTime())
                 .menu(log.getMenu())
                 .intake(log.getIntake())
                 .unit(log.getUnit())
